@@ -4,6 +4,16 @@ Working on the Udemy course "Docker &amp; Kubernetes: The Practical Guide [2023 
 
 # Cheatsheet
 
+## Dockerfile instructions
+- `FROM <image>:<tag>` - First instruction, base `<image>` and specific `<tag>` version that we'll use to build on top of it our own image.
+- `WORKDIR <directory>` - Set the working directory inside the image to `<directory>`.
+- `COPY <host_path> <image_path>` - Copy `<host_path>` into `<image_path>` in the image. `<host_path>` may be a file or a directory.
+- `RUN <command>` - Run `<command>` inside the image.
+- `CMD <command>` - Run `<command>` when the container runs. `<command>` is a comma separated list of arguments within brackets (e.g.: `["npm", "start"]`).
+- `EXPOSE <port>` - Documentation instruction to say that we should map the container's `<port>` to a host port when running a container of this image.
+- `ARG <argument>=<value>` - Define a build argument named `<argument>` and with a default `<value>`.
+- `ENV <variable>=<value>` - Define an environment variable named `<variable>` and with a default `<value>`.
+
 ## Basic commands
 - `docker build .` - Builds a docker image using the Dockerfile from the current working directory.
 - `docker run <image>` - Run a container of `<image>`. `<image>` can be an image ID or name.
@@ -19,7 +29,7 @@ Working on the Udemy course "Docker &amp; Kubernetes: The Practical Guide [2023 
 `docker build [OPTIONS] PATH` - Builds a docker image in `PATH` using `[OPTIONS]`.
 
 - `-t <repository>:<version>` - Builds an image and tags it with the tag `<repository>:<version>`. `<repository>` may be simply a name if it's not going to be pushed to a docker registry or it has to be an URL to a docker registry`.
-
+- `--build-arg <argument>=<value>` - Set the Dockerfile's build argument called `<argument>` with this `<value>`.
 
 ## docker run options
 `docker run [OPTIONS] <image>:<tag>` - Run a container of `<image>` but specifically the version `<tag>` with a list of `[OPTIONS]`.
@@ -30,6 +40,8 @@ Working on the Udemy course "Docker &amp; Kubernetes: The Practical Guide [2023 
 - `-v <container_directory>` - Uses an anonymous volume for `<container_directory>`.
 - `-v <volume_name>:<container_directory>` - Uses a named volume `<volume_name>` for `<container_directory>`.
 - `-v <host_directory>:<container_directory>` - Binds the host's `<host_directory>` to the container's `<container_directory>` as a volume. `<host_directory>` must be an absolute path.
+- `-e <variable>=<value>` - Use an environment variable named `<variable>` and set its `<value>`.
+- `--env-file <path>` - Pass multiple environment variables defined in the file found in `<path>` to the container. Each line in the file should be a `<variable>=<value>` pair.
 
 ## Volumes
 - `docker volume ls` - List all volumes managed by docker (named and anonymous).
