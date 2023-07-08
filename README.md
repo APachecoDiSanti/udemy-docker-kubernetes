@@ -11,6 +11,7 @@ Working on the Udemy course "Docker &amp; Kubernetes: The Practical Guide [2023 
 - `RUN <command>` - Run `<command>` inside the image.
 - `CMD <command>` - Run `<command>` when the container runs. `<command>` is a comma separated list of arguments within brackets (e.g.: `["npm", "start"]`).
 - `EXPOSE <port>` - Documentation instruction to say that we should map the container's `<port>` to a host port when running a container of this image.
+- `VOLUME ["<image_path>"]` - Creates an anonymous volume for the image's directory at `<image_path>`.
 - `ARG <argument>=<value>` - Define a build argument named `<argument>` and with a default `<value>`.
 - `ENV <variable>=<value>` - Define an environment variable named `<variable>` and with a default `<value>`.
 
@@ -49,4 +50,3 @@ Working on the Udemy course "Docker &amp; Kubernetes: The Practical Guide [2023 
 - `docker volume inspect <volume>` - Show information about `<volume>`. `<volume>` can be either an ID or a name.
 - `docker volume create <volume>` - Create a named volume manually.  `<volume>` is the name you will give the volume.
 - `docker volume prune` - Delete all unused anonymous and named volumes.
-- `VOLUME ["<container_directory>"]` - In a Dockerfile, creates an anonymous volume for the container's `<container_directory`.
