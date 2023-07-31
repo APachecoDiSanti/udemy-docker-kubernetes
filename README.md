@@ -25,6 +25,7 @@ Working on the Udemy course "Docker &amp; Kubernetes: The Practical Guide [2023 
 - `docker pull <repository>:<version>` - Pulls the image `<repository>:<version>` from the internet into your local machine.
 - `docker push <repository>:<version>` - Pushes the image tagged as `<repository>:<version>` to the docker registry at `<repository>`.
 - `docker logs <container>` - See the logs of a container. `<container>` can be a container ID or name.
+- `docker create network <name>` - Create a docker network called `<name>`.
 
 ## docker build options
 `docker build [OPTIONS] PATH` - Builds a docker image in `PATH` using `[OPTIONS]`.
@@ -43,6 +44,7 @@ Working on the Udemy course "Docker &amp; Kubernetes: The Practical Guide [2023 
 - `-v <host_directory>:<container_directory>` - Binds the host's `<host_directory>` to the container's `<container_directory>` as a volume. `<host_directory>` must be an absolute path.
 - `-e <variable>=<value>` - Use an environment variable named `<variable>` and set its `<value>`.
 - `--env-file <path>` - Pass multiple environment variables defined in the file found in `<path>` to the container. Each line in the file should be a `<variable>=<value>` pair.
+- `--network <name>` - Connect this container to the `<name>` network.
 
 ## Volumes
 - `docker volume ls` - List all volumes managed by docker (named and anonymous).
