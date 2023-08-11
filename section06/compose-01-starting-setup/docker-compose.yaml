@@ -1,12 +1,24 @@
 version: "3.8" # version of docker compose specification, only informative
 services:
   goals-db:
-    image: "mongo"
+    image: mongo
     volumes:
       - data:/data/db
     env_file:
       - ./env/goals-db.env
-  #goals-be:
+  goals-be:
+    build: ./backend
+    ports:
+      - "80:80"
+    volumes:
+      - logs:/app/logs
+      - ./backend:/app # bind mount
+      - /app/node_modules # anonymous volume
+    env_file:
+      - ./env/goals-be.env
+    depends_on:
+      - goals-db
   #goals-fe:
 volumes: # list all NAMED volumes being used
   data:
+  logs:
