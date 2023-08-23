@@ -18,7 +18,16 @@ services:
       - ./env/goals-be.env
     depends_on:
       - goals-db
-  #goals-fe:
+  goals-fe:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend/src:/app/src
+    stdin_open: true
+    tty: true
+    depends_on:
+      - goals-be
 volumes: # list all NAMED volumes being used
   data:
   logs:

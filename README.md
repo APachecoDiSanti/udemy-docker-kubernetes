@@ -1,5 +1,5 @@
 # udemy-docker-kubernetes
-Working on the Udemy course "Docker &amp; Kubernetes: The Practical Guide [2023 Edition]"
+Working on the Udemy course "Docker & Kubernetes: The Practical Guide [2023 Edition]"
 
 
 # Cheatsheet
@@ -52,3 +52,35 @@ Working on the Udemy course "Docker &amp; Kubernetes: The Practical Guide [2023 
 - `docker volume inspect <volume>` - Show information about `<volume>`. `<volume>` can be either an ID or a name.
 - `docker volume create <volume>` - Create a named volume manually.  `<volume>` is the name you will give the volume.
 - `docker volume prune` - Delete all unused anonymous and named volumes.
+
+## Docker Compose
+
+Use a single `docker-compose.yaml` file to specify the configuration of all services needed in a single/multi container application.
+
+### Commands
+
+All commands will look for `docker-compose.yaml` in the working directory and use its configuration to run the commands.
+
+- `docker-compose up` -  Will create and run all the containers.
+- `docker-compose down` - Will stop and remove all the containers.
+- `docker-compose build` Will build all the images for the services.
+
+#### docker-compose up options
+- `--build` - Force building the images of the containers before creating them and running them.
+- `-d` - Use detached mode. No logs will be printed to standard output and the same terminal may be used for following commands.
+
+### Root fields
+- `version: "<version>"` - Version of docker compose specification, only informative. A string, must be between quotes.
+- `services:` - All services names should be defined here as sub-fields with their respective configuration.  E.g.: `service-name:`.
+- `volumes:` - All NAMED volumes being used by services should be defined here as sub-fields. E.g.: `database:`.
+
+### Services fields
+- `image: <image_name>` - The name of the image that will be downloaded to create this service's container.
+- `volumes:` - List of all volumes used by this service (all type of volumes). The bind volumes may use relative paths instead of absolute ones.
+- `env_file:` - List of paths to environment files with `key=value` lines defining the environment variables to use in this service.
+- `build: <directory>` - Specifies the directory containing the `Dockerfile` that will be used to build the image for this service.
+- `ports:` - List of `"host_port:container_port"` string pairs. It will be used to map host ports to their respective container ports.
+- `depends_on:` - List of service names that must be up and running before starting to create the container for this service. This is also used to stop services while respecting the dependencies between them.
+- `stdin_open: true` - Interactive mode (standard input).
+- `tty: true` - Attach a terminal to the running service.
+- `container_name: <name>` - Specify a static name for the container of this service. If not specified, the container's name will be `<directory>_<service>_<inc>` using the `docker-compose.yaml` directory and an incremental number.
