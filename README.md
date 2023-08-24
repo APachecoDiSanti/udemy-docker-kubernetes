@@ -14,6 +14,7 @@ Working on the Udemy course "Docker & Kubernetes: The Practical Guide [2023 Edit
 - `VOLUME ["<image_path>"]` - Creates an anonymous volume for the image's directory at `<image_path>`.
 - `ARG <argument>=<value>` - Define a build argument named `<argument>` and with a default `<value>`.
 - `ENV <variable>=<value>` - Define an environment variable named `<variable>` and with a default `<value>`.
+- `ENTRYPOINT <command>` - Prepend `<command>` to any command that is asked to run in this container. `<command>` is a comma separated list of arguments within brackets (e.g.: `["npm"]`).
 
 ## Basic commands
 - `docker build .` - Builds a docker image using the Dockerfile from the current working directory.
@@ -52,6 +53,11 @@ Working on the Udemy course "Docker & Kubernetes: The Practical Guide [2023 Edit
 - `docker volume inspect <volume>` - Show information about `<volume>`. `<volume>` can be either an ID or a name.
 - `docker volume create <volume>` - Create a named volume manually.  `<volume>` is the name you will give the volume.
 - `docker volume prune` - Delete all unused anonymous and named volumes.
+
+## Others
+- `docker container attach <container>` - Attach the current terminal to the `<container>`.
+- `docker exec <container> <command>` - Runs `<command>` inside `<container>` besides the default command this `<container>` normally executes. The original command and application continue to run while `<command>` also runs.
+- `docker exec -it <container> <command>` - Runs `<command>` inside `<container>` and uses interactive mode in order to interact with it.
 
 ## Docker Compose
 
