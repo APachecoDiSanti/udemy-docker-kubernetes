@@ -16,7 +16,9 @@ Working on the Udemy course "Docker & Kubernetes: The Practical Guide [2023 Edit
 - `ENV <variable>=<value>` - Define an environment variable named `<variable>` and with a default `<value>`.
 - `ENTRYPOINT <command>` - Prepend `<command>` to any command that is asked to run in this container. `<command>` is a comma separated list of arguments within brackets (e.g.: `["npm"]`).
 
-## Basic commands
+## Docker commands
+
+### Basic commands
 - `docker build .` - Builds a docker image using the Dockerfile from the current working directory.
 - `docker run <image>` - Run a container of `<image>`. `<image>` can be an image ID or name.
 - `docker run <repository>:<version>` - Run a container of the image `<repository>` but specifically the version `<version>`. `<repository>` should be an image name or an URL to an image but not an image ID.
@@ -28,13 +30,13 @@ Working on the Udemy course "Docker & Kubernetes: The Practical Guide [2023 Edit
 - `docker logs <container>` - See the logs of a container. `<container>` can be a container ID or name.
 - `docker create network <name>` - Create a docker network called `<name>`.
 
-## docker build options
+### docker build options
 `docker build [OPTIONS] PATH` - Builds a docker image in `PATH` using `[OPTIONS]`.
 
 - `-t <repository>:<version>` - Builds an image and tags it with the tag `<repository>:<version>`. `<repository>` may be simply a name if it's not going to be pushed to a docker registry or it has to be an URL to a docker registry`.
 - `--build-arg <argument>=<value>` - Set the Dockerfile's build argument called `<argument>` with this `<value>`.
 
-## docker run options
+### docker run options
 `docker run [OPTIONS] <image>:<tag>` - Run a container of `<image>` but specifically the version `<tag>` with a list of `[OPTIONS]`.
 
 - `--name <name>` - Assigns the specified `<name>` to the created container.
@@ -47,14 +49,15 @@ Working on the Udemy course "Docker & Kubernetes: The Practical Guide [2023 Edit
 - `--env-file <path>` - Pass multiple environment variables defined in the file found in `<path>` to the container. Each line in the file should be a `<variable>=<value>` pair.
 - `--network <name>` - Connect this container to the `<name>` network.
 
-## Volumes
+### Volumes
 - `docker volume ls` - List all volumes managed by docker (named and anonymous).
 - `docker volume rm <volume>` - Delete the volume `<volume>`. `<volume>` can be either an ID or a name.
 - `docker volume inspect <volume>` - Show information about `<volume>`. `<volume>` can be either an ID or a name.
 - `docker volume create <volume>` - Create a named volume manually.  `<volume>` is the name you will give the volume.
 - `docker volume prune` - Delete all unused anonymous and named volumes.
 
-## Others
+### Others
+- `docker container prune` - Delete all stopped containers
 - `docker container attach <container>` - Attach the current terminal to the `<container>`.
 - `docker exec <container> <command>` - Runs `<command>` inside `<container>` besides the default command this `<container>` normally executes. The original command and application continue to run while `<command>` also runs.
 - `docker exec -it <container> <command>` - Runs `<command>` inside `<container>` and uses interactive mode in order to interact with it.
@@ -69,11 +72,16 @@ All commands will look for `docker-compose.yaml` in the working directory and us
 
 - `docker-compose up` -  Will create and run all the containers.
 - `docker-compose down` - Will stop and remove all the containers.
-- `docker-compose build` Will build all the images for the services.
+- `docker-compose build` - Will build all the images for the services.
+- `docker-compose run <service> <command>` - Will run `<command>` in a container of `<service>`
+- `docker-compose exec <service> <command>` - Will run `<command>` in an existing container of `<service>`
 
 #### docker-compose up options
 - `--build` - Force building the images of the containers before creating them and running them.
 - `-d` - Use detached mode. No logs will be printed to standard output and the same terminal may be used for following commands.
+
+#### docker-compose run options
+- `--rm` - Needed to remove the container after running the command since it won't remove itself automatically as when using `docker compose up` and `docker compose down`.
 
 ### Root fields
 - `version: "<version>"` - Version of docker compose specification, only informative. A string, must be between quotes.
