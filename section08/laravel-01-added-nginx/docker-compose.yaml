@@ -1,0 +1,23 @@
+version: "3.8"
+
+services: 
+  server:
+    image: "nginx:stable-alpine"
+    ports: 
+      - "8000:80"
+    volumes: 
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+   php:
+      build:
+        context: ./dockerfiles
+        dockerfile: php.dockerfile
+# not really needed since we don't need to communicate from local machine to container and we only need container to contianer communication
+# we update nginx.conf to use port 9000 instead      
+#      ports:
+#        - "3000:9000"
+      volumes:
+        - ./src:/var/www/html:delegated #improve performance
+  # mysql:
+  # composer:
+  # artisan:
+  # npm:
