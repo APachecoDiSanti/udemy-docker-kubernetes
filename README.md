@@ -92,9 +92,10 @@ All commands will look for `docker-compose.yaml` in the working directory and us
 - `image: <image_name>` - The name of the image that will be downloaded to create this service's container.
 - `volumes:` - List of all volumes used by this service (all type of volumes). The bind volumes may use relative paths instead of absolute ones.
 - `env_file:` - List of paths to environment files with `key=value` lines defining the environment variables to use in this service.
-- `build: <directory>` - Specifies the directory containing the `Dockerfile` that will be used to build the image for this service.
+- `build: <directory>` - Specifies the directory containing the `Dockerfile` that will be used to build the image for this service. Can also use subfields `context` (where the image will be built) and `dockerfile` (where is the Dockerfile to build the image of this service).
 - `ports:` - List of `"host_port:container_port"` string pairs. It will be used to map host ports to their respective container ports.
 - `depends_on:` - List of service names that must be up and running before starting to create the container for this service. This is also used to stop services while respecting the dependencies between them.
 - `stdin_open: true` - Interactive mode (standard input).
 - `tty: true` - Attach a terminal to the running service.
 - `container_name: <name>` - Specify a static name for the container of this service. If not specified, the container's name will be `<directory>_<service>_<inc>` using the `docker-compose.yaml` directory and an incremental number.
+- `entrypoint: ["command","arg1"]` - Define or overwrite the ENTRYPOINT for the container
